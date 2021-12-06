@@ -22,7 +22,9 @@ function Footer() {
       </div>
       <div class={tw`flex flex-col lg:flex-row gap-x-8 gap-y-6 text-right`}>
         <FooterLink href="https://deno.com/deploy">Deploy</FooterLink>
-        <FooterLink href="https://manual.deno.js.cn/introduction">手册</FooterLink>
+        <FooterLink href="https://manual.deno.js.cn/introduction">
+          手册
+        </FooterLink>
         <FooterLink href="/deno/stable">Runtime API</FooterLink>
         <FooterLink href="https://deno.land/std">标准库</FooterLink>
         <FooterLink href="https://deno.land/x">第三方模块</FooterLink>
