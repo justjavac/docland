@@ -22,12 +22,12 @@ function Footer() {
       </div>
       <div class={tw`flex flex-col lg:flex-row gap-x-8 gap-y-6 text-right`}>
         <FooterLink href="https://deno.com/deploy">Deploy</FooterLink>
-        <FooterLink href="https://deno.land/manual">Manual</FooterLink>
+        <FooterLink href="https://manual.deno.js.cn/introduction">手册</FooterLink>
         <FooterLink href="/deno/stable">Runtime API</FooterLink>
-        <FooterLink href="https://deno.land/std">Standard Library</FooterLink>
-        <FooterLink href="https://deno.land/x">Third Party Modules</FooterLink>
-        <FooterLink href="https://deno.com/blog">Blog</FooterLink>
-        <FooterLink href="https://deno.com/company">Company</FooterLink>
+        <FooterLink href="https://deno.land/std">标准库</FooterLink>
+        <FooterLink href="https://deno.land/x">第三方模块</FooterLink>
+        <FooterLink href="https://deno.com/blog">博客</FooterLink>
+        <FooterLink href="https://deno.com/company">公司</FooterLink>
       </div>
     </footer>
   );
@@ -45,7 +45,7 @@ function Header() {
       </a>
       <div class={tw`flex items-center gap-6`}>
         <NavLink href="https://deno.land/">CLI</NavLink>
-        <NavLink href="https://deno.com/blog">Blog</NavLink>
+        <NavLink href="https://deno.com/blog">博客</NavLink>
         <NavLink href="https://deno.com/deploy">Deploy</NavLink>
       </div>
     </header>

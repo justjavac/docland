@@ -41,7 +41,7 @@ export function SpecifierForm() {
             </a>
           </p>
         </div>
-        <div class={tw`text-center my-6`}>or view documentation for</div>
+        <div class={tw`text-center my-6`}>或者查看其他模块的文档</div>
         <div>
           <form
             class={tw
@@ -54,7 +54,7 @@ export function SpecifierForm() {
               class={tw
                 `absolute z-10 ml-4 mt-0.5 px-1.5 tracking-wider bg-white text-gray-400 font-medium text-sm transition`}
             >
-              URL to Document
+              请输入模块 URL
             </label>
             <div class={tw`pt-3 w-full`}>
               <div
@@ -67,13 +67,13 @@ export function SpecifierForm() {
                   type="text"
                   class={tw
                     `w-full outline-none px-6 py-4 bg-white text-gray-800 focus:text-gray-900`}
-                  label="URL to Document"
+                  label="请输入模块 URL"
                 />
               </div>
             </div>
             <div class={tw`absolute right-2 bottom-2 hidden lg:block`}>
               <button class={gtw("insideButton")} type="submit">
-                Document
+                查看文档
               </button>
             </div>
           </form>
@@ -92,9 +92,9 @@ export function SpecifierForm() {
               {"https://deno.land/std/node/http.ts"}
             </DocLinks>
           </p>
-          <h2 class={tw`text-3xl font-bold`}>About</h2>
+          <h2 class={tw`text-3xl font-bold`}>关于</h2>
           <p>
-            The source for this web application is available at{" "}
+            网站源码在{" "}
             <a
               class={gtw("url")}
               href="https://github.com/denoland/docland"
@@ -102,7 +102,15 @@ export function SpecifierForm() {
               rel="noopener"
             >
               github.com/denoland/docland
-            </a>.
+            </a>，中文版源码{" "}
+            <a
+              class={gtw("url")}
+              href="https://github.com/justjavac/docland"
+              target="_blank"
+              rel="noopener"
+            >
+              github.com/justjavac/docland
+            </a>。
           </p>
           <p>
             It can also be{" "}

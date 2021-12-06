@@ -11,11 +11,11 @@ function Meta({ base }: { base: URL }) {
   const ogImage = new URL("/static/banner.png", base).toString();
   return (
     <Helmet>
-      <title>Deno Doc</title>
+      <title>Deno 文档</title>
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content="@denoland" />
       <meta name="twitter:creator" content="@denoland" />
-      <meta property="og:title" content="Deploy Doc" />
+      <meta property="og:title" content="Deploy 文档" />
       <meta name="og:image" content={ogImage} />
       <meta
         name="og:image:alt"
