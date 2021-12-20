@@ -77,7 +77,7 @@ export function SpecifierForm() {
         </div>
         <div class={tw`space-y-6 mt-8`}>
           <p>
-            Some samples of documentation:
+            一些文档示例:
             <DocLinks>
               {"https://deno.land/std/fs/mod.ts"}
               {"https://deno.land/x/oak/mod.ts"}
@@ -101,7 +101,9 @@ export function SpecifierForm() {
               rel="noopener"
             >
               github.com/denoland/docland
-            </a>，中文版源码{" "}
+            </a>
+            <br />
+            中文版源码{" "}
             <a
               class={gtw("url")}
               href="https://github.com/justjavac/docland"
@@ -112,7 +114,7 @@ export function SpecifierForm() {
             </a>。
           </p>
           <p>
-            It can also be{" "}
+            源码可以{" "}
             <a
               class={tw
                 `transition focus-visible:ring-2 focus-visible:ring-black focus:outline-none my-1 py-2 px-2.5 text-base text-gray(600 dark:200) border border-gray-300 rounded-xl hover:shadow h-full`}
@@ -123,9 +125,9 @@ export function SpecifierForm() {
               }`}
               target="_blank"
             >
-              Deployed...
+              部署
             </a>{" "}
-            into its own deployment as well.
+            到 Deno Deploy 上。
           </p>
         </div>
       </div>

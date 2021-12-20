@@ -31,7 +31,7 @@ function Footer() {
         <FooterLink href="https://deno.js.cn/artwork">Artwork</FooterLink>
         <FooterLink href="https://deno.com/blog">博客</FooterLink>
         <FooterLink href="https://deno.js.cn/translations">
-        翻译
+          翻译
         </FooterLink>
         <FooterLink href="https://github.com/denoland/deno/wiki#companies-interested-in-deno">
           对 Deno 感兴趣的公司
