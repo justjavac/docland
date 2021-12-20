@@ -111,7 +111,7 @@ function Header() {
           <NavLink href="https://deno.com/deploy">Deploy</NavLink>
           <NavLink href="https://manual.deno.js.cn">手册</NavLink>
           <NavLink href="https://deno.com/blog">博客</NavLink>
-          <NavLink href="https://deno-cn.vercel.app/deno/stable">API</NavLink>
+          <NavLink href="/deno/stable">API</NavLink>
           <NavLink href="https://deno-cn.vercel.app/std">标准库</NavLink>
           <NavLink href="https://deno-cn.vercel.app/x">第三方模块</NavLink>
         </div>
