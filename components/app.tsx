@@ -23,7 +23,7 @@ function Footer() {
         `mt-20 max-w-screen-xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8`}
     >
       <nav class={tw`-mx-5 -my-2 flex flex-wrap justify-center`}>
-        <FooterLink href="https://deno.js.cn/manual">手册</FooterLink>
+        <FooterLink href="https://manual.deno.js.cn">手册</FooterLink>
         <FooterLink href="/deno/stable">API</FooterLink>
         <FooterLink href="https://deno.js.cn/std">标准库</FooterLink>
         <FooterLink href="https://deno.js.cn/x">第三方模块</FooterLink>
@@ -105,7 +105,7 @@ function Header() {
           class={`nav ${tw`md:(flex w-auto) hidden w-screen px-2 pt-4 pb-3`}`}
         >
           <NavLink href="https://deno.com/deploy">Deploy</NavLink>
-          <NavLink href="https://deno.js.cn/manual">手册</NavLink>
+          <NavLink href="https://manual.deno.js.cn">手册</NavLink>
           <NavLink href="https://deno.com/blog">博客</NavLink>
           <NavLink href="https://deno.js.cn/deno/stable">API</NavLink>
           <NavLink href="https://deno.js.cn/std">标准库</NavLink>
