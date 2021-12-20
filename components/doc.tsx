@@ -389,7 +389,7 @@ function SideBarHeader({ children }: { children: Child<string> }) {
         {version && (
           <div>
             <h3 class={tw`text-gray-600 dark:text-gray-400 text-sm mt-2`}>
-              Version
+              版本
             </h3>
             <p class={tw`truncate`}>{version}</p>
           </div>
