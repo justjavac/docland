@@ -1,4 +1,4 @@
-#!/usr/bin/env -S deno run --config deno.jsonc --allow-read=. --allow-write=./static --allow-net
+#!/usr/bin/env -S deno run --config deno.jsonc --import-map import-map.json --allow-read=. --allow-write=./static --allow-net
 
 // Copyright 2021 the Deno authors. All rights reserved. MIT license.
 
@@ -254,6 +254,7 @@ const libEsnextPromises = [
   "es2020.string",
   "es2020.symbol.wellknown",
   "es2021",
+  "es2021.intl",
   "es2021.promise",
   "es2021.string",
   "es2021.weakref",
@@ -261,9 +262,7 @@ const libEsnextPromises = [
   "esnext.error",
   "esnext.intl",
   "esnext.object",
-  "esnext.promise",
   "esnext.string",
-  "esnext.weakref",
 ].map((lib) =>
   doc(
     `https://raw.githubusercontent.com/denoland/deno/${latestTag}/cli/dts/lib.${lib}.d.ts`,

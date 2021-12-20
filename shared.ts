@@ -47,6 +47,27 @@ setup({
       purple: twColors.fuchsia,
       pink: twColors.pink,
     },
+    fontFamily: {
+      "sans": [
+        "Inter var",
+        "system-ui",
+        "Segoe UI",
+        "Roboto",
+        "Helvetica Neue",
+        "Arial",
+        "Noto Sans",
+        "sans-serif",
+      ],
+      "mono": [
+        "Menlo",
+        "Monaco",
+        "Lucida Console",
+        "Consolas",
+        "Liberation Mono",
+        "Courier New",
+        "monospace",
+      ],
+    },
   },
 });
 

@@ -29,15 +29,6 @@ import { gtw, largeMarkdownStyles, largeTagStyles } from "./styles.ts";
 import { TypeAliasCodeBlock, TypeAliasDoc, TypeAliasToc } from "./types.tsx";
 import { VariableCodeBlock } from "./variables.tsx";
 
-function assertAll<N extends DocNode>(
-  nodes: DocNode[],
-  kind: DocNode["kind"],
-): asserts nodes is N[] {
-  if (!nodes.every((n) => n.kind === kind)) {
-    throw new Error(`Not every node of kind "${kind}".`);
-  }
-}
-
 function ModuleToc(
   { children, library = false }: {
     children: Child<DocNodeCollection>;
@@ -46,7 +37,7 @@ function ModuleToc(
 ) {
   const collection = take(children);
   const imports = collection.import
-    ? collection.import.map((imp) => <li>{imp.importDef.src}</li>)
+    ? collection.import.map(([, imp]) => <li>{imp.importDef.src}</li>)
     : undefined;
   return (
     <div>
@@ -81,7 +72,7 @@ function DocNodes({ children }: { children: Child<DocNodeCollection> }) {
     <div class={gtw("mainBox")}>
       {collection.moduleDoc && (
         <JsDoc style={largeMarkdownStyles}>
-          {collection.moduleDoc[0].jsDoc}
+          {collection.moduleDoc[0][1].jsDoc}
         </JsDoc>
       )}
       {collection.namespace && (
@@ -125,10 +116,6 @@ function DocNodes({ children }: { children: Child<DocNodeCollection> }) {
 
 function CodeBlock({ children }: { children: Child<DocNode[]> }) {
   const nodes = take(children);
-  if (nodes[0].kind === "function") {
-    assertAll<DocNodeFunction>(nodes, "function");
-    return <FnCodeBlock>{nodes}</FnCodeBlock>;
-  }
   const elements = [];
   for (const node of nodes) {
     switch (node.kind) {
@@ -148,6 +135,12 @@ function CodeBlock({ children }: { children: Child<DocNode[]> }) {
         elements.push(<VariableCodeBlock>{node}</VariableCodeBlock>);
     }
   }
+  const fnNodes = nodes.filter(({ kind }) =>
+    kind === "function"
+  ) as DocNodeFunction[];
+  if (fnNodes.length) {
+    elements.push(<FnCodeBlock>{fnNodes}</FnCodeBlock>);
+  }
   return elements;
 }
 
@@ -155,10 +148,6 @@ function Doc(
   { children, path }: { children: Child<DocNode[]>; path: string[] },
 ) {
   const nodes = take(children);
-  if (nodes[0].kind === "function") {
-    assertAll<DocNodeFunction>(nodes, "function");
-    return <FnDoc>{nodes}</FnDoc>;
-  }
   const elements = [];
   for (const node of nodes) {
     switch (node.kind) {
@@ -178,6 +167,12 @@ function Doc(
         elements.push(<TypeAliasDoc>{node}</TypeAliasDoc>);
         break;
     }
+  }
+  const fnNodes = nodes.filter(({ kind }) =>
+    kind === "function"
+  ) as DocNodeFunction[];
+  if (fnNodes.length) {
+    elements.push(<FnDoc>{fnNodes}</FnDoc>);
   }
   return elements;
 }
@@ -225,7 +220,7 @@ export function DocPage(
 ) {
   const state = store.state as StoreState;
   const { entries, url, includePrivate } = state;
-  const collection = asCollection(entries, includePrivate);
+  const collection = asCollection(entries, undefined, includePrivate);
   const library = url.startsWith("deno:");
   const item = take(children);
   if (item) {
@@ -268,7 +263,7 @@ export function DocPage(
     return (
       <div class={gtw("content")}>
         <DocMeta base={base} url={url} doc={jsDoc?.doc ?? ""} item={item} />
-        <nav class={tw`p-6 sm:py-12 md:border-r md:border-gray-200`}>
+        <nav class={gtw("leftNav")}>
           <SideBarHeader>{url}</SideBarHeader>
           <DocToc>{nodes}</DocToc>
         </nav>
@@ -293,7 +288,7 @@ export function DocPage(
     return (
       <div class={gtw("content")}>
         <DocMeta base={base} url={url} doc={jsDoc?.doc ?? ""} />
-        <nav class={tw`p-6 sm:py-12 md:border-r md:border-gray-200`}>
+        <nav class={gtw("leftNav")}>
           <SideBarHeader>{url}</SideBarHeader>
           <ModuleToc library={library}>{collection}</ModuleToc>
         </nav>
@@ -330,36 +325,48 @@ function SideBarHeader({ children }: { children: Child<string> }) {
     }
     return (
       <div>
-        <h2 class={tw`text-gray-900 text-2xl font-bold`}>
+        <h2 class={tw`text-gray-900 text-xl lg:text-2xl font-bold`}>
           <a href={href} class={tw`hover:underline`}>
             {title}
           </a>
         </h2>
         {subtitle && (
-          <h3 class={tw`text-gray-900 text-xl font-bold`}>{subtitle}</h3>
+          <h3 class={tw`text-gray-900 dark:text-gray-50 lg:text-xl font-bold`}>
+            {subtitle}
+          </h3>
         )}
-        <h3 class={tw`text-gray-600 text-sm mt-2`}>Registry</h3>
+        <h3 class={tw`text-gray-600 dark:text-gray-400 text-sm mt-2`}>
+          Registry
+        </h3>
         <p class={tw`truncate`}>{parsed.registry}</p>
         {parsed.org && (
           <div>
-            <h3 class={tw`text-gray-600 text-sm mt-2`}>Organization</h3>
+            <h3 class={tw`text-gray-600 dark:text-gray-400 text-sm mt-2`}>
+              Organization
+            </h3>
             <p class={tw`truncate`}>{parsed.org}</p>
           </div>
         )}
         {parsed.package && (
           <div>
-            <h3 class={tw`text-gray-600 text-sm mt-2`}>Package</h3>
+            <h3 class={tw`text-gray-600 dark:text-gray-400 text-sm mt-2`}>
+              Package
+            </h3>
             <p class={tw`truncate`}>{parsed.package}</p>
           </div>
         )}
         {module && (
           <div>
-            <h3 class={tw`text-gray-600 text-sm mt-2`}>Module</h3>
+            <h3 class={tw`text-gray-600 dark:text-gray-400 text-sm mt-2`}>
+              Module
+            </h3>
             <p class={tw`truncate`}>{module}</p>
           </div>
         )}
         <div>
-          <h3 class={tw`text-gray-600 text-sm mt-2`}>Source</h3>
+          <h3 class={tw`text-gray-600 dark:text-gray-400 text-sm mt-2`}>
+            Source
+          </h3>
           <p class={tw`truncate`}>
             <a href={url} target="_blank" rel="noopener" class={tw`truncate`}>
               <IconLink />
@@ -373,33 +380,21 @@ function SideBarHeader({ children }: { children: Child<string> }) {
     const [label, version] = getLibWithVersion(url);
     return (
       <div>
-        <h2 class={tw`text-gray-900 text-2xl font-bold`}>
+        <h2
+          class={tw
+            `text-gray-900 dark:text-gray-50 text-xl lg:text-2xl font-bold`}
+        >
           <a href={href} class={tw`hover:underline break-all`}>{label}</a>
         </h2>
         {version && (
           <div>
-            <h3 class={tw`text-gray-600 text-sm mt-2`}>Version</h3>
+            <h3 class={tw`text-gray-600 dark:text-gray-400 text-sm mt-2`}>
+              Version
+            </h3>
             <p class={tw`truncate`}>{version}</p>
           </div>
         )}
       </div>
     );
   }
-}
-
-function SideBar(
-  { children, item, url }: {
-    children: Child<DocNodeCollection>;
-    item?: string | null;
-    url: string;
-  },
-) {
-  const collection = take(children);
-  const library = url.startsWith("deno:");
-  return (
-    <nav class={tw`p-6 sm:py-12 md:border-r md:border-gray-200`}>
-      <SideBarHeader>{url}</SideBarHeader>
-      {item ?? <ModuleToc library={library}>{collection}</ModuleToc>}
-    </nav>
-  );
 }

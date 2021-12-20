@@ -11,7 +11,7 @@ function DocLinks({ children }: DocLinksProps) {
   const links = children.map((child) => (
     <li>
       <a class={gtw("link")} href={`/${child}`}>
-        <code>{child}</code>
+        <code>{child.replaceAll(/(\/|\?|\.)/g, "$1&#8203;")}</code>
       </a>
     </li>
   ));
@@ -23,21 +23,17 @@ export function SpecifierForm() {
     <main class={gtw("main")}>
       <h1 class={gtw("mainHeader")}>Deno Doc</h1>
       <div
-        class={tw`p-6 md:(col-span-3 p-12)`}
+        class={tw`py-6 md:(col-span-3 py-12)`}
       >
-        <div class={tw`space-y-6`}>
+        <div class={tw`space-y-4`}>
           <p>
-            <a href="/deno/stable">
-              <button class={gtw("formButton")} type="button">
-                Deno CLI APIs (Stable)
-              </button>
+            <a href="/deno/stable" class={gtw("formButton")}>
+              Deno CLI APIs (Stable)
             </a>
           </p>
           <p>
-            <a href="/deno/unstable">
-              <button class={gtw("formButton")} type="button">
-                Deno CLI APIs (<code>--unstable</code>)
-              </button>
+            <a href="/deno/unstable" class={gtw("formButton")}>
+              Deno CLI APIs (<code>--unstable</code>)
             </a>
           </p>
         </div>
@@ -45,29 +41,30 @@ export function SpecifierForm() {
         <div>
           <form
             class={tw
-              `relative text-gray-500 focus-within:text-gray-700 sm:col-span-6`}
+              `relative text-gray(500 focus-within:700 dark:focus-within:(300)) sm:col-span-6`}
             action="/doc"
             method="get"
           >
             <label
               for="url"
               class={tw
-                `absolute z-10 ml-4 mt-0.5 px-1.5 tracking-wider bg-white text-gray-400 font-medium text-sm transition`}
+                `absolute z-10 ml-4 mt-0.5 px-1.5 tracking-wider bg(white dark:gray-800) text-gray-400 font-medium text-sm transition`}
             >
               请输入模块 URL
             </label>
             <div class={tw`pt-3 w-full`}>
               <div
                 class={tw
-                  `relative border border-gray-300 focus-within:border-gray-500 rounded-xl overflow-hidden transition flex`}
+                  `relative border border-gray(300 focus-within:500 dark:(600 focus-within:400)) rounded-xl overflow-hidden transition flex`}
               >
                 <input
                   id="url"
                   name="url"
-                  type="text"
+                  type="url"
+                  required
                   class={tw
-                    `w-full outline-none px-6 py-4 bg-white text-gray-800 focus:text-gray-900`}
-                  label="请输入模块 URL"
+                    `w-full outline-none px-6 py-4 bg(white dark:gray-800) text-gray(800 focus:900 dark:(100 focus:50))`}
+                  label="请输入 URL"
                 />
               </div>
             </div>
@@ -92,7 +89,9 @@ export function SpecifierForm() {
               {"https://deno.land/std/node/http.ts"}
             </DocLinks>
           </p>
-          <h2 class={tw`text-3xl font-bold`}>关于</h2>
+        </div>
+        <div class={tw`mt-16 space-y-6`}>
+          <h2 class={tw`text-2xl lg:text-3xl font-bold`}>关于</h2>
           <p>
             网站源码在{" "}
             <a
@@ -116,7 +115,7 @@ export function SpecifierForm() {
             It can also be{" "}
             <a
               class={tw
-                `transition focus-visible:ring-2 focus-visible:ring-black focus:outline-none my-1 py-2 px-2.5 text-base text-gray-600 border border-gray-300 rounded-xl hover:shadow hidden lg:inline h-full`}
+                `transition focus-visible:ring-2 focus-visible:ring-black focus:outline-none my-1 py-2 px-2.5 text-base text-gray(600 dark:200) border border-gray-300 rounded-xl hover:shadow h-full`}
               href={`https://dash.deno.com/new?url=${
                 encodeURIComponent(
                   "https://raw.githubusercontent.com/denoland/docland/main/main.ts",

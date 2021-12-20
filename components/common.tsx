@@ -23,15 +23,15 @@ import { gtw } from "./styles.ts";
 import type { BaseStyles } from "./styles.ts";
 
 export interface DocNodeCollection {
-  moduleDoc?: DocNodeModuleDoc[];
-  import?: DocNodeImport[];
-  namespace?: DocNodeNamespace[];
-  class?: DocNodeClass[];
-  enum?: DocNodeEnum[];
-  variable?: DocNodeVariable[];
-  function?: DocNodeFunction[];
-  interface?: DocNodeInterface[];
-  typeAlias?: DocNodeTypeAlias[];
+  moduleDoc?: [string, DocNodeModuleDoc][];
+  import?: [string, DocNodeImport][];
+  namespace?: [string, DocNodeNamespace][];
+  class?: [string, DocNodeClass][];
+  enum?: [string, DocNodeEnum][];
+  variable?: [string, DocNodeVariable][];
+  function?: [string, DocNodeFunction][];
+  interface?: [string, DocNodeInterface][];
+  typeAlias?: [string, DocNodeTypeAlias][];
 }
 
 export interface DocProps<Node extends DocNode> {
@@ -62,23 +62,40 @@ export function isAbstract(node: DocNode) {
   }
 }
 
+function append(
+  collection: DocNodeCollection,
+  entries: DocNode[],
+  path?: string,
+  includePrivate?: boolean,
+) {
+  for (const entry of entries) {
+    if (includePrivate || entry.declarationKind !== "private") {
+      if (entry.kind === "namespace" && !entry.namespaceDef.elements.length) {
+        continue;
+      }
+      const docNodes: [string, DocNode][] = collection[entry.kind] ??
+        (collection[entry.kind] = []);
+      const label = path ? `${path}.${entry.name}` : entry.name;
+      docNodes.push([label, entry]);
+      if (entry.kind === "namespace") {
+        append(collection, entry.namespaceDef.elements, label, includePrivate);
+      }
+    }
+  }
+}
+
 export function asCollection(
   entries: DocNode[],
+  path?: string,
   includePrivate = false,
 ): DocNodeCollection {
   const collection: DocNodeCollection = {};
-  for (const entry of entries) {
-    if (includePrivate || entry.declarationKind !== "private") {
-      const docNodes: DocNode[] = collection[entry.kind] ??
-        (collection[entry.kind] = []);
-      docNodes.push(entry);
-    }
-  }
+  append(collection, entries, path, includePrivate);
   return collection;
 }
 
-function byName(a: DocNode, b: DocNode) {
-  return a.name.localeCompare(b.name);
+function byName(a: [string, DocNode], b: [string, DocNode]) {
+  return a[0].localeCompare(b[0]);
 }
 
 function getName(node: DocNode, path?: string[]) {
@@ -86,7 +103,16 @@ function getName(node: DocNode, path?: string[]) {
 }
 
 export function Anchor({ children: name }: { children: string }) {
-  return <a href={`#${name}`} class={gtw("anchor")} aria-label="Anchor">§</a>;
+  return (
+    <a
+      href={`#${name}`}
+      class={gtw("anchor")}
+      aria-label="Anchor"
+      tabIndex={-1}
+    >
+      §
+    </a>
+  );
 }
 
 export function DocTitle(
@@ -97,13 +123,16 @@ export function DocTitle(
 }
 
 function Entry<Node extends DocNode>(
-  { children, path, style }: NodeProps<Node>,
+  { children, style }: {
+    children: Child<[string, Node]>;
+    style: BaseStyles;
+  },
 ) {
-  const node = take(children);
+  const [label, node] = take(children);
   return (
     <li>
       <h3 class={gtw(style)}>
-        <NodeLink path={path}>{node}</NodeLink>
+        <NodeLink>{label}</NodeLink>
         {isAbstract(node) ? <Tag color="yellow">abstract</Tag> : undefined}
         {isDeprecated(node.jsDoc)
           ? <Tag color="gray">deprecated</Tag>
@@ -114,18 +143,11 @@ function Entry<Node extends DocNode>(
   );
 }
 
-interface NodeLinkProps {
-  children: Child<DocNode>;
-  path?: string[];
-}
-
-export function NodeLink({ children, path }: NodeLinkProps) {
-  const node = take(children);
+export function NodeLink({ children }: { children: Child<string> }) {
+  const label = take(children);
   const { url } = store.state as StoreState;
-  const href = `/${url}${url.endsWith("/") ? "" : "/"}~/${
-    [...path ?? [], node.name].join(".")
-  }`;
-  return <a href={href}>{node.name}</a>;
+  const href = `/${url}${url.endsWith("/") ? "" : "/"}~/${label}`;
+  return <a href={href}>{label}</a>;
 }
 
 export function SectionTitle({ children }: { children: Child<string> }) {
@@ -140,16 +162,20 @@ export function SectionTitle({ children }: { children: Child<string> }) {
 }
 
 export function Section<Node extends DocNode>(
-  { children, path, style, title }: NodesProps<Node>,
+  { children, style, title }: {
+    children: Child<[string, Node][]>;
+    style: BaseStyles;
+    title: string;
+  },
 ) {
   const nodes = take(children);
   const displayed = new Set();
-  const items = nodes.sort(byName).map((node) => {
-    if (displayed.has(node.name)) {
+  const items = nodes.sort(byName).map(([label, node]) => {
+    if (displayed.has(label)) {
       return;
     }
-    displayed.add(node.name);
-    return <Entry path={path} style={style}>{node}</Entry>;
+    displayed.add(label);
+    return <Entry style={style}>{[label, node]}</Entry>;
   });
   return (
     <div>
@@ -172,6 +198,13 @@ export function SubSectionTitle(
   );
 }
 
+const stableURL = new URLPattern(
+  "https://github.com/denoland/deno/releases/download/:version/lib.deno.d.ts",
+);
+const rawGitHubURL = new URLPattern(
+  "https://raw.githubusercontent.com/:org/:repo/:ver/:path*",
+);
+
 export function DocWithLink(
   { children, location }: {
     children: unknown;
@@ -180,8 +213,20 @@ export function DocWithLink(
 ) {
   let href;
   if (location) {
+    let filename = location.filename;
+    const match = stableURL.exec(filename);
+    if (match) {
+      filename =
+        `https://doc-proxy.deno.dev/builtin/${match.pathname.groups.version}`;
+    } else {
+      const match = rawGitHubURL.exec(filename);
+      if (match) {
+        const { org, repo, ver, path } = match.pathname.groups;
+        filename = `https://github.com/${org}/${repo}/blob/${ver}/${path}`;
+      }
+    }
     try {
-      const url = new URL(location.filename);
+      const url = new URL(filename);
       url.hash = `L${location.line}`;
       href = url.toString();
     } catch {
@@ -197,7 +242,7 @@ export function DocWithLink(
             href={href}
             target="_blank"
             class={tw
-              `pl-2 break-words text-gray-600 hover:text-gray-800 hover:underline`}
+              `pl-2 break-words text-gray-600 hover:text-gray-800 dark:(text-gray-400 hover:text-gray-200) hover:underline`}
           >
             [src]
           </a>
