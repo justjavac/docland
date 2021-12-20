@@ -23,14 +23,14 @@ function Footer() {
         `mt-20 max-w-screen-xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8`}
     >
       <nav class={tw`-mx-5 -my-2 flex flex-wrap justify-center`}>
-        <FooterLink href="https://deno.land/manual">手册</FooterLink>
+        <FooterLink href="https://deno.js.cn/manual">手册</FooterLink>
         <FooterLink href="/deno/stable">API</FooterLink>
-        <FooterLink href="https://deno.land/std">标准库</FooterLink>
-        <FooterLink href="https://deno.land/x">第三方模块</FooterLink>
-        <FooterLink href="https://deno.land/benchmarks">Benchmarks</FooterLink>
-        <FooterLink href="https://deno.land/artwork">Artwork</FooterLink>
+        <FooterLink href="https://deno.js.cn/std">标准库</FooterLink>
+        <FooterLink href="https://deno.js.cn/x">第三方模块</FooterLink>
+        <FooterLink href="https://deno.js.cn/benchmarks">Benchmarks</FooterLink>
+        <FooterLink href="https://deno.js.cn/artwork">Artwork</FooterLink>
         <FooterLink href="https://deno.com/blog">博客</FooterLink>
-        <FooterLink href="https://deno.land/translations">
+        <FooterLink href="https://deno.js.cn/translations">
         翻译
         </FooterLink>
         <FooterLink href="https://github.com/denoland/deno/wiki#companies-interested-in-deno">
@@ -105,11 +105,11 @@ function Header() {
           class={`nav ${tw`md:(flex w-auto) hidden w-screen px-2 pt-4 pb-3`}`}
         >
           <NavLink href="https://deno.com/deploy">Deploy</NavLink>
-          <NavLink href="/manual">手册</NavLink>
+          <NavLink href="https://deno.js.cn/manual">手册</NavLink>
           <NavLink href="https://deno.com/blog">博客</NavLink>
-          <NavLink href="/deno/stable">API</NavLink>
-          <NavLink href="/std">标准库</NavLink>
-          <NavLink href="/x">第三方模块</NavLink>
+          <NavLink href="https://deno.js.cn/deno/stable">API</NavLink>
+          <NavLink href="https://deno.js.cn/std">标准库</NavLink>
+          <NavLink href="https://deno.js.cn/x">第三方模块</NavLink>
         </div>
       </nav>
     </header>
