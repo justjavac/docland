@@ -25,12 +25,16 @@ function Footer() {
       <nav class={tw`-mx-5 -my-2 flex flex-wrap justify-center`}>
         <FooterLink href="https://manual.deno.js.cn">手册</FooterLink>
         <FooterLink href="/deno/stable">API</FooterLink>
-        <FooterLink href="https://deno.js.cn/std">标准库</FooterLink>
-        <FooterLink href="https://deno.js.cn/x">第三方模块</FooterLink>
-        <FooterLink href="https://deno.js.cn/benchmarks">Benchmarks</FooterLink>
-        <FooterLink href="https://deno.js.cn/artwork">Artwork</FooterLink>
+        <FooterLink href="https://deno-cn.vercel.app/std">标准库</FooterLink>
+        <FooterLink href="https://deno-cn.vercel.app/x">第三方模块</FooterLink>
+        <FooterLink href="https://deno-cn.vercel.app/benchmarks">
+          Benchmarks
+        </FooterLink>
+        <FooterLink href="https://deno-cn.vercel.app/artwork">
+          Artwork
+        </FooterLink>
         <FooterLink href="https://deno.com/blog">博客</FooterLink>
-        <FooterLink href="https://deno.js.cn/translations">
+        <FooterLink href="https://deno-cn.vercel.app/translations">
           翻译
         </FooterLink>
         <FooterLink href="https://github.com/denoland/deno/wiki#companies-interested-in-deno">
@@ -107,9 +111,9 @@ function Header() {
           <NavLink href="https://deno.com/deploy">Deploy</NavLink>
           <NavLink href="https://manual.deno.js.cn">手册</NavLink>
           <NavLink href="https://deno.com/blog">博客</NavLink>
-          <NavLink href="https://deno.js.cn/deno/stable">API</NavLink>
-          <NavLink href="https://deno.js.cn/std">标准库</NavLink>
-          <NavLink href="https://deno.js.cn/x">第三方模块</NavLink>
+          <NavLink href="https://deno-cn.vercel.app/deno/stable">API</NavLink>
+          <NavLink href="https://deno-cn.vercel.app/std">标准库</NavLink>
+          <NavLink href="https://deno-cn.vercel.app/x">第三方模块</NavLink>
         </div>
       </nav>
     </header>
