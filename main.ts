@@ -10,6 +10,7 @@ import { createFaviconMW } from "./middleware/favicon.ts";
 import { logging, timing } from "./middleware/logging.ts";
 import { docGet, imgGet, pathGetHead } from "./routes/doc.tsx";
 import { indexGet } from "./routes/index.tsx";
+import { getRaw } from "./routes/raw.ts";
 
 const router = new Router();
 
@@ -74,8 +75,19 @@ router.get(
   "/static/:path*",
   async (ctx) => {
     const url = new URL(`./static/${ctx.params.path}`, import.meta.url);
+    try {
+      await Deno.stat(url);
+    } catch (err) {
+      if (err instanceof Deno.errors.NotFound) {
+        ctx.response.status = 404;
+        ctx.response.body = "Not Found";
+        return;
+      }
+      throw err;
+    }
+    const resp = await fetch(url);
     ctx.response.type = lookup(url.toString());
-    ctx.response.body = await Deno.readFile(url);
+    ctx.response.body = resp.body;
     ctx.response.headers.set(
       "expires",
       new Date(Date.now() + 86_400).toUTCString(),
@@ -100,6 +112,9 @@ router.get(
       `/${ctx.params.proto}://${ctx.params.host}/${ctx.params.path}`,
     ),
 );
+
+// Proxy raw GitHub deno lib files
+router.get("/raw/deno/stable/:version", getRaw);
 
 // The main documentation routes
 router.get("/:proto(http:/|https:/)/:host/:path*/~/:item+", pathGetHead);
