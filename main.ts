@@ -18,6 +18,17 @@ const router = new Router();
 // The index, renders "specifier_form"
 router.get("/", indexGet);
 
+router.get("/robots.txt", (ctx) => {
+  ctx.response.body = `User-agent: *
+Disallow: /static/
+`;
+  ctx.response.type = "text";
+  ctx.response.headers.set(
+    "expires",
+    new Date(Date.now() + 86_400).toUTCString(),
+  );
+});
+
 router.get("/manifest.json", (ctx) => {
   ctx.response.body = {
     "short_name": "Deno Doc",
@@ -65,6 +76,34 @@ router.get("/manifest.json", (ctx) => {
     ],
   };
   ctx.response.type = "json";
+  ctx.response.headers.set(
+    "expires",
+    new Date(Date.now() + 86_400).toUTCString(),
+  );
+});
+
+router.get("/sw.js", (ctx) => {
+  ctx.response.body = `
+  self.addEventListener("install", (evt) => {
+    evt.waitUntil(
+      caches.open("docland").then((cache) => {
+        return cache.addAll([
+          "/",
+          "/deno/stable",
+        ]);
+      }),
+    );
+  });
+  
+  self.addEventListener("fetch", (evt) => {
+    evt.respondWith(
+      caches.match(evt.request).then((response) => {
+        return response ?? fetch(evt.request);
+      }),
+    );
+  });
+`;
+  ctx.response.type = "application/javascript";
   ctx.response.headers.set(
     "expires",
     new Date(Date.now() + 86_400).toUTCString(),
