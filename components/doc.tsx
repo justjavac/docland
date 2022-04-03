@@ -383,7 +383,7 @@ function SideBarHeader({ children }: { children: Child<string> }) {
             <h3 class={tw`text-gray-600 dark:text-gray-400 text-sm mt-2`}>
               Module
             </h3>
-            <p class={tw`truncate`}>{module}</p>
+            <p class={tw`truncate`} innerHTML={{ __dangerousHtml: module }} />
           </div>
         )}
         {version && (
@@ -508,8 +508,14 @@ export function Usage(
       {item ? undefined : <h2 class={gtw("section")}>Usage</h2>}
       <div class={gtw("markdown", largeMarkdownStyles)}>
         <pre>
-          {`<button class="${tw
-            `float-right px-2 font-sans focus-visible:ring-2 text-sm text-gray(500 dark:300) border border-gray(300 dark:500) rounded hover:shadow`}" type="button" onclick="copyImportStatement()">Copy</button>`}
+          <button
+            class={tw
+              `float-right px-2 font-sans focus-visible:ring-2 text-sm text-gray(500 dark:300) border border-gray(300 dark:500) rounded hover:shadow`}
+            type="button"
+            onclick="copyImportStatement()"
+          >
+            Copy
+          </button>
           <code>
             <span class="code-keyword">import</span> {item
               ? (
