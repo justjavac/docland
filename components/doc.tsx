@@ -3,17 +3,11 @@
 /** @jsxFrag Fragment */
 import { Fragment, h, tw } from "../deps.ts";
 import type { DocNode, DocNodeFunction, DocNodeNamespace } from "../deps.ts";
-import { getLibWithVersion, store, StoreState } from "../shared.ts";
+import { store, StoreState } from "../shared.ts";
 import { camelize, parseURL, take } from "../util.ts";
 import type { Child } from "../util.ts";
 import { ClassCodeBlock, ClassDoc, ClassToc } from "./classes.tsx";
-import {
-  asCollection,
-  IconLink,
-  isAbstract,
-  Section,
-  TocLink,
-} from "./common.tsx";
+import { asCollection, isAbstract, Section, TocLink } from "./common.tsx";
 import type { DocNodeCollection } from "./common.tsx";
 import { EnumCodeBlock, EnumDoc, EnumToc } from "./enums.tsx";
 import { ErrorMessage } from "./error.tsx";
@@ -26,6 +20,7 @@ import {
 } from "./interfaces.tsx";
 import { DocMeta } from "./meta.tsx";
 import { NamespaceDoc, NamespaceToc } from "./namespaces.tsx";
+import { SideBarHeader } from "./sidebar.tsx";
 import { gtw, largeMarkdownStyles, largeTagStyles } from "./styles.ts";
 import { TypeAliasCodeBlock, TypeAliasDoc, TypeAliasToc } from "./types.tsx";
 import { VariableCodeBlock } from "./variables.tsx";
@@ -320,6 +315,7 @@ export function DocPage(
   }
 }
 
+<<<<<<< HEAD
 function SideBarHeader({ children }: { children: Child<string> }) {
   const url = take(children);
   const parsed = parseURL(url);
@@ -430,6 +426,8 @@ function SideBarHeader({ children }: { children: Child<string> }) {
   }
 }
 
+=======
+>>>>>>> e78292f42680ea1af6326bb209e0ea2a36204041
 declare global {
   interface HTMLAttributes<RefType extends EventTarget = EventTarget>
     extends ClassAttributes<RefType> {
