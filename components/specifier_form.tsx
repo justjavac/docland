@@ -68,14 +68,8 @@ export function SpecifierForm() {
                   name="url"
                   type="url"
                   required
-<<<<<<< HEAD
-                  class={tw
-                    `w-full outline-none px-6 py-4 bg(white dark:gray-800) text-gray(800 focus:900 dark:(100 focus:50))`}
-                  label="请输入 URL"
-=======
                   class={tw`w-full outline-none px-6 py-4 bg(white dark:gray-800) text-gray(800 focus:900 dark:(100 focus:50))`}
                   label="URL to Document"
->>>>>>> 9c6ac0a302ec85d774ea46e7351ab63c5865bdf7
                 />
               </div>
             </div>

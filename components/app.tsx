@@ -36,27 +36,12 @@ function Footer() {
       <nav class={tw`-mx-5 -my-2 flex flex-wrap justify-center`}>
         <FooterLink href="https://manual.deno.js.cn">手册</FooterLink>
         <FooterLink href="/deno/stable">API</FooterLink>
-<<<<<<< HEAD
-        <FooterLink href="https://deno-cn.vercel.app/std">标准库</FooterLink>
-        <FooterLink href="https://deno-cn.vercel.app/x">第三方模块</FooterLink>
-        <FooterLink href="https://deno-cn.vercel.app/benchmarks">
-          Benchmarks
-        </FooterLink>
-        <FooterLink href="https://deno-cn.vercel.app/artwork">
-          Artwork
-        </FooterLink>
+        <FooterLink href="https://deno.land/std">标准库</FooterLink>
+        <FooterLink href="https://deno.land/x">第三方模块</FooterLink>
+        <FooterLink href="https://deno.land/benchmarks">性能测试</FooterLink>
+        <FooterLink href="https://deno.land/artwork">艺术作品</FooterLink>
         <FooterLink href="https://deno.com/blog">博客</FooterLink>
-        <FooterLink href="https://deno-cn.vercel.app/translations">
-          翻译
-        </FooterLink>
-=======
-        <FooterLink href="https://deno.land/std">Standard Library</FooterLink>
-        <FooterLink href="https://deno.land/x">Third Party Modules</FooterLink>
-        <FooterLink href="https://deno.land/benchmarks">Benchmarks</FooterLink>
-        <FooterLink href="https://deno.land/artwork">Artwork</FooterLink>
-        <FooterLink href="https://deno.com/blog">Blog</FooterLink>
-        <FooterLink href="https://status.deno.land/">System Status</FooterLink>
->>>>>>> 9c6ac0a302ec85d774ea46e7351ab63c5865bdf7
+        <FooterLink href="https://status.deno.land/">系统状态</FooterLink>
         <FooterLink href="https://github.com/denoland/deno/wiki#companies-interested-in-deno">
           对 Deno 感兴趣的公司
         </FooterLink>
