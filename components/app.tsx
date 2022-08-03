@@ -31,24 +31,17 @@ export function App({ children }: { children?: unknown }) {
 function Footer() {
   return (
     <footer
-      class={tw
-        `sticky top-full mt-20 max-w-screen-xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8`}
+      class={tw`sticky top-full mt-20 max-w-screen-xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8`}
     >
       <nav class={tw`-mx-5 -my-2 flex flex-wrap justify-center`}>
         <FooterLink href="https://manual.deno.js.cn">手册</FooterLink>
         <FooterLink href="/deno/stable">API</FooterLink>
-        <FooterLink href="https://deno-cn.vercel.app/std">标准库</FooterLink>
-        <FooterLink href="https://deno-cn.vercel.app/x">第三方模块</FooterLink>
-        <FooterLink href="https://deno-cn.vercel.app/benchmarks">
-          Benchmarks
-        </FooterLink>
-        <FooterLink href="https://deno-cn.vercel.app/artwork">
-          Artwork
-        </FooterLink>
+        <FooterLink href="https://deno.land/std">标准库</FooterLink>
+        <FooterLink href="https://deno.land/x">第三方模块</FooterLink>
+        <FooterLink href="https://deno.land/benchmarks">性能测试</FooterLink>
+        <FooterLink href="https://deno.land/artwork">艺术作品</FooterLink>
         <FooterLink href="https://deno.com/blog">博客</FooterLink>
-        <FooterLink href="https://deno-cn.vercel.app/translations">
-          翻译
-        </FooterLink>
+        <FooterLink href="https://status.deno.land/">系统状态</FooterLink>
         <FooterLink href="https://github.com/denoland/deno/wiki#companies-interested-in-deno">
           对 Deno 感兴趣的公司
         </FooterLink>
@@ -63,12 +56,10 @@ function Footer() {
 function Header() {
   return (
     <header
-      class={tw
-        `bg-gray-50 border-b border-gray-200 relative py-6 z-10 dark:(bg-gray-800 border-gray-700)`}
+      class={tw`bg-gray-50 border-b border-gray-200 relative py-6 z-10 dark:(bg-gray-800 border-gray-700)`}
     >
       <nav
-        class={tw
-          `mx-auto flex flex-wrap items-center justify-between px-4 sm:px-6 md:px-8 lg:p-0 max-w-screen-lg ${nav}`}
+        class={tw`mx-auto flex flex-wrap items-center justify-between px-4 sm:px-6 md:px-8 lg:p-0 max-w-screen-lg ${nav}`}
       >
         <a href="/" class={tw`flex items-center`}>
           <Logo />
@@ -85,8 +76,7 @@ function Header() {
         <div class={tw`-mr-2 flex items-center md:hidden`}>
           <label
             for="nav-cb"
-            class={tw
-              `inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:(text-gray-500 bg-gray-100) focus:(outline-none bg-gray-100 text-gray-500) dark:(text-gray-100 hover:(text-gray-200 bg-gray-900) focus:(outline-none bg-gray-900 text-gray-200))`}
+            class={tw`inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:(text-gray-500 bg-gray-100) focus:(outline-none bg-gray-100 text-gray-500) dark:(text-gray-100 hover:(text-gray-200 bg-gray-900) focus:(outline-none bg-gray-900 text-gray-200))`}
           >
             <svg
               stroke="currentColor"
@@ -170,8 +160,7 @@ function Logo() {
 
 const NavLink = ({ children, href }: { children?: unknown; href: string }) => (
   <a
-    class={tw
-      `block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:(text-gray-900 bg-gray-50) focus:(outline-none text-gray-900 bg-gray-50) md:(inline-block font-medium text-gray-500) dark:(text-gray-200 hover:(text-gray-50 bg-gray-900) focus:(text-gray-50 bg-gray-900) md:(text-gray-400))`}
+    class={tw`block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:(text-gray-900 bg-gray-50) focus:(outline-none text-gray-900 bg-gray-50) md:(inline-block font-medium text-gray-500) dark:(text-gray-200 hover:(text-gray-50 bg-gray-900) focus:(text-gray-50 bg-gray-900) md:(text-gray-400))`}
     href={href}
   >
     {children}
@@ -187,8 +176,7 @@ const FooterLink = ({
 }) => (
   <div class={tw`p-2`}>
     <a
-      class={tw
-        `text-base leading-6 text-gray-500 hover:text-gray-900 dark:(text-gray-400 hover:text-gray-50)`}
+      class={tw`text-base leading-6 text-gray-500 hover:text-gray-900 dark:(text-gray-400 hover:text-gray-50)`}
       href={href}
     >
       {children}
