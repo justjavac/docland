@@ -34,6 +34,7 @@ function Footer() {
       class={tw`sticky top-full mt-20 max-w-screen-xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8`}
     >
       <nav class={tw`-mx-5 -my-2 flex flex-wrap justify-center`}>
+<<<<<<< HEAD
         <FooterLink href="https://manual.deno.js.cn">手册</FooterLink>
         <FooterLink href="/deno/stable">API</FooterLink>
         <FooterLink href="https://deno.land/std">标准库</FooterLink>
@@ -42,6 +43,16 @@ function Footer() {
         <FooterLink href="https://deno.land/artwork">艺术作品</FooterLink>
         <FooterLink href="https://deno.com/blog">博客</FooterLink>
         <FooterLink href="https://status.deno.land/">系统状态</FooterLink>
+=======
+        <FooterLink href="https://deno.land/manual">Manual</FooterLink>
+        <FooterLink href="https://deno.land/api">API</FooterLink>
+        <FooterLink href="https://deno.land/std">Standard Library</FooterLink>
+        <FooterLink href="https://deno.land/x">Third Party Modules</FooterLink>
+        <FooterLink href="https://deno.land/benchmarks">Benchmarks</FooterLink>
+        <FooterLink href="https://deno.land/artwork">Artwork</FooterLink>
+        <FooterLink href="https://deno.com/blog">Blog</FooterLink>
+        <FooterLink href="https://status.deno.land/">System Status</FooterLink>
+>>>>>>> 09690cdb093265b8ce9ebc3886b6905d699a5ca2
         <FooterLink href="https://github.com/denoland/deno/wiki#companies-interested-in-deno">
           对 Deno 感兴趣的公司
         </FooterLink>
@@ -114,11 +125,19 @@ function Header() {
           class={`nav ${tw`md:(flex w-auto) hidden w-screen px-2 pt-4 pb-3`}`}
         >
           <NavLink href="https://deno.com/deploy">Deploy</NavLink>
+<<<<<<< HEAD
           <NavLink href="https://manual.deno.js.cn">手册</NavLink>
           <NavLink href="https://deno.com/blog">博客</NavLink>
           <NavLink href="/deno/stable">API</NavLink>
           <NavLink href="https://deno-cn.vercel.app/std">标准库</NavLink>
           <NavLink href="https://deno-cn.vercel.app/x">第三方模块</NavLink>
+=======
+          <NavLink href="https://deno.land/manual">Manual</NavLink>
+          <NavLink href="https://deno.com/blog">Blog</NavLink>
+          <NavLink href="https://deno.com/api">API</NavLink>
+          <NavLink href="https://deno.land/std">Standard Library</NavLink>
+          <NavLink href="https://deno.land/x">Third Party Modules</NavLink>
+>>>>>>> 09690cdb093265b8ce9ebc3886b6905d699a5ca2
         </div>
       </nav>
     </header>
