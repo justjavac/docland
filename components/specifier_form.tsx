@@ -49,12 +49,7 @@ export function SpecifierForm() {
             other libraries/packages/modules available on the internet.
           </p>
         </div>
-<<<<<<< HEAD
-        <div class={tw`text-center my-6`}>或者查看其他模块的文档</div>
-        <div>
-=======
         <div class={tw`mt-6`}>
->>>>>>> 09690cdb093265b8ce9ebc3886b6905d699a5ca2
           <form
             class={tw`relative text-gray(500 focus-within:700 dark:focus-within:(300)) sm:col-span-6`}
             action="/doc"
