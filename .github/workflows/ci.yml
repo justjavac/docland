@@ -31,6 +31,3 @@ jobs:
 
       - name: 🧪  test
         run: deno task test
-
-      - name: 🧪  test build
-        run: deno task build

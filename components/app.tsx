@@ -114,11 +114,19 @@ function Header() {
           class={`nav ${tw`md:(flex w-auto) hidden w-screen px-2 pt-4 pb-3`}`}
         >
           <NavLink href="https://deno.com/deploy">Deploy</NavLink>
+<<<<<<< HEAD
           <NavLink href="https://manual.deno.js.cn">手册</NavLink>
           <NavLink href="https://deno.com/blog">博客</NavLink>
           <NavLink href="https://deno.land/api">API</NavLink>
           <NavLink href="https://deno.land/std">标准库</NavLink>
           <NavLink href="https://deno.land/x">第三方模块</NavLink>
+=======
+          <NavLink href="https://deno.land/manual">Manual</NavLink>
+          <NavLink href="https://deno.com/blog">Blog</NavLink>
+          <NavLink href="https://deno.land/api">API</NavLink>
+          <NavLink href="https://deno.land/std">Standard Library</NavLink>
+          <NavLink href="https://deno.land/x">Third Party Modules</NavLink>
+>>>>>>> 5fc93d458c59a5ddec9deb06e51dfb32ffdc4b7f
         </div>
       </nav>
     </header>
