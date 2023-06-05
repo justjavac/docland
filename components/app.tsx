@@ -116,9 +116,9 @@ function Header() {
           <NavLink href="https://deno.com/deploy">Deploy</NavLink>
           <NavLink href="https://manual.deno.js.cn">手册</NavLink>
           <NavLink href="https://deno.com/blog">博客</NavLink>
-          <NavLink href="https://deno.land/api">API</NavLink>
-          <NavLink href="https://deno.land/std">标准库</NavLink>
-          <NavLink href="https://deno.land/x">第三方模块</NavLink>
+          <NavLink href="https://denoland-cn.deno.dev/api">API</NavLink>
+          <NavLink href="https://denoland-cn.deno.dev/std">标准库</NavLink>
+          <NavLink href="https://denoland-cn.deno.dev/x">第三方模块</NavLink>
         </div>
       </nav>
     </header>
